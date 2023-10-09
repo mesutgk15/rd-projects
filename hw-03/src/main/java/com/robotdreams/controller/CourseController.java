@@ -2,7 +2,7 @@ package com.robotdreams.controller;
 
 import com.robotdreams.model.dto.CourseDTO;
 import com.robotdreams.model.dto.StudentDTO;
-import com.robotdreams.service.CourseServiceImpl;
+import com.robotdreams.service.CourseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,44 +12,44 @@ import java.util.Set;
 @RequestMapping("course")
 public class CourseController {
 
-    private final CourseServiceImpl courseServiceImpl;
+    private final CourseService courseService;
 
-    public CourseController(CourseServiceImpl courseServiceImpl) {
-        this.courseServiceImpl = courseServiceImpl;
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
     }
 
     @GetMapping("/all")
     public List<CourseDTO> findAllCourses() {
-        return courseServiceImpl.findAllCourses();
+        return courseService.findAllCourses();
     }
 
     @GetMapping
     public CourseDTO findCourseById(@RequestParam long id) {
-        return courseServiceImpl.findCourseById(id);
+        return courseService.findCourseById(id);
     }
 
     @GetMapping("/new")
     public void createCourse(@RequestBody CourseDTO courseDTO) {
-        courseServiceImpl.createCourse(courseDTO);
+        courseService.createCourse(courseDTO);
     }
 
     @PutMapping("/update")
     public void updateCourse(@RequestParam long id, @RequestBody CourseDTO courseDTO) {
-        courseServiceImpl.updateCourse(id, courseDTO);
+        courseService.updateCourse(id, courseDTO);
     }
 
     @PutMapping("/instructor")
     public void setInstructor(@RequestParam long id, @RequestParam long instructorid) {
-        courseServiceImpl.setInstructor(id, instructorid);
+        courseService.setInstructor(id, instructorid);
     }
 
     @DeleteMapping
     public void deleteCourse(@RequestParam long id) {
-        courseServiceImpl.deleteCourse(id);
+        courseService.deleteCourse(id);
     }
 
     @GetMapping("/students")
     public Set<StudentDTO> getStudents(@RequestParam long id) {
-        return courseServiceImpl.getStudents(id);
+        return courseService.getStudents(id);
     }
 }

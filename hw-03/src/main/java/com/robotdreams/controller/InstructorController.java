@@ -4,7 +4,7 @@ import com.robotdreams.model.dto.CourseDTO;
 import com.robotdreams.model.dto.InstructorDTO;
 import com.robotdreams.model.dto.PermanentInstructorDTO;
 import com.robotdreams.model.dto.VisitingResearcherDTO;
-import com.robotdreams.service.InstructorServiceImpl;
+import com.robotdreams.service.InstructorService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,49 +13,49 @@ import java.util.List;
 @RequestMapping("instructor")
 public class InstructorController {
 
-    private final InstructorServiceImpl instructorServiceImpl;
+    private final InstructorService instructorService;
 
-    public InstructorController(InstructorServiceImpl instructorServiceImpl) {
-        this.instructorServiceImpl = instructorServiceImpl;
+    public InstructorController(InstructorService instructorService) {
+        this.instructorService = instructorService;
     }
 
     @GetMapping("/all")
     public List<InstructorDTO> findAllInstructors() {
-        return instructorServiceImpl.findAllInstructors();
+        return instructorService.findAllInstructors();
     }
 
     @GetMapping
     public InstructorDTO findInstructorById(@RequestParam long id) {
-        return instructorServiceImpl.findInstructorById(id);
+        return instructorService.findInstructorById(id);
     }
 
     @PostMapping("/new")
     public void createInstructor(@RequestBody PermanentInstructorDTO instructorDTO) {
-        instructorServiceImpl.createInstructor(instructorDTO);
+        instructorService.createInstructor(instructorDTO);
     }
 
     @PostMapping("/new/visiting")
     public void createInstructor(@RequestBody VisitingResearcherDTO instructorDTO) {
-        instructorServiceImpl.createInstructor(instructorDTO);
+        instructorService.createInstructor(instructorDTO);
     }
 
     @PutMapping("/update/visiting")
     public void updateInstructor(@RequestParam long id, @RequestBody VisitingResearcherDTO instructorDTO) {
-        instructorServiceImpl.updateInstructor(id, instructorDTO);
+        instructorService.updateInstructor(id, instructorDTO);
     }
 
     @PutMapping("/update")
     public void updateInstructor(@RequestParam long id, @RequestBody PermanentInstructorDTO instructorDTO) {
-        instructorServiceImpl.updateInstructor(id, instructorDTO);
+        instructorService.updateInstructor(id, instructorDTO);
     }
 
     @DeleteMapping
     public void deleteInstructor(@RequestParam long id) {
-        instructorServiceImpl.deleteInstructor(id);
+        instructorService.deleteInstructor(id);
     }
 
     @GetMapping("/courses")
     public List<CourseDTO> getCourses(@RequestParam long id) {
-       return instructorServiceImpl.getCourses(id);
+       return instructorService.getCourses(id);
     }
 }
