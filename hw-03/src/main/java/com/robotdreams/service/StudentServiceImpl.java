@@ -44,7 +44,7 @@ public class StudentServiceImpl implements StudentService{
 
         List<Student> studentList = studentRepository.findAll();
         List<StudentDTO> studentDTOList = new ArrayList<>();
-        studentList.stream().forEach(s -> studentDTOList.add(studentEntityToStudentDTO.map(s)));
+        studentList.forEach(s -> studentDTOList.add(studentEntityToStudentDTO.map(s)));
         return studentDTOList;
     }
 

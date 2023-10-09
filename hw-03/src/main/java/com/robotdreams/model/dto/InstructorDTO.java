@@ -8,7 +8,9 @@ public abstract class InstructorDTO {
     private String name;
     private String address;
     private String phoneNumber;
+    private InstructorType instructorType;
 
+    public enum InstructorType {VISITING, PERMANENT}
     public InstructorDTO(String name, String address, String phoneNumber) {
         this.name = name;
         this.address = address;
@@ -40,5 +42,13 @@ public abstract class InstructorDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public InstructorType getInstructorType() {
+        return instructorType;
+    }
+
+    public void setInstructorType(InstructorType instructorType) {
+        this.instructorType = instructorType;
     }
 }

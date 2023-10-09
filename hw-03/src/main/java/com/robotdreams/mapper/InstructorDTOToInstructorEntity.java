@@ -4,6 +4,7 @@ import com.robotdreams.model.Instructor;
 import com.robotdreams.model.PermanentInstructor;
 import com.robotdreams.model.VisitingResearcher;
 import com.robotdreams.model.dto.InstructorDTO;
+import com.robotdreams.model.dto.VisitingResearcherDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,6 +21,7 @@ public class InstructorDTOToInstructorEntity implements BaseMapper<Instructor, I
         switch (instructorDTO.getClass().getSimpleName()) {
             case "VisitingResearcherDTO":
                 instructor = new VisitingResearcher();
+                ((VisitingResearcher) instructor).setWorkingHours(((VisitingResearcherDTO) instructorDTO).getWorkingHours());
                 break;
             default:
                 instructor = new PermanentInstructor();

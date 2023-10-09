@@ -22,9 +22,11 @@ public class InstructorEntityToInstructorDTO implements BaseMapper<InstructorDTO
             case "VisitingResearcher":
                 instructorDTO = new VisitingResearcherDTO();
                 ((VisitingResearcherDTO) instructorDTO).setWorkingHours(((VisitingResearcher) instructor).getWorkingHours());
+                instructorDTO.setInstructorType(InstructorDTO.InstructorType.VISITING);
                 break;
             default:
                 instructorDTO = new PermanentInstructorDTO();
+                instructorDTO.setInstructorType(InstructorDTO.InstructorType.PERMANENT);
                 break;
         }
 

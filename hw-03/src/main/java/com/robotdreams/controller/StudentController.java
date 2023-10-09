@@ -4,6 +4,7 @@ import com.robotdreams.model.dto.CourseDTO;
 import com.robotdreams.model.dto.StudentDTO;
 import com.robotdreams.service.StudentService;
 import com.robotdreams.service.StudentServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class StudentController {
 
     private final StudentService studentService;
 
+    @Autowired
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }

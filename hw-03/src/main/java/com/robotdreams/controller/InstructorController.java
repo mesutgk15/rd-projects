@@ -5,6 +5,7 @@ import com.robotdreams.model.dto.InstructorDTO;
 import com.robotdreams.model.dto.PermanentInstructorDTO;
 import com.robotdreams.model.dto.VisitingResearcherDTO;
 import com.robotdreams.service.InstructorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class InstructorController {
 
     private final InstructorService instructorService;
 
+    @Autowired
     public InstructorController(InstructorService instructorService) {
         this.instructorService = instructorService;
     }

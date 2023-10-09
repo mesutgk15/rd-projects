@@ -37,7 +37,7 @@ public class InstructorServiceImpl implements InstructorService{
     public List<InstructorDTO> findAllInstructors() {
         List<Instructor> instructorList = instructorRepository.findAll();
         List<InstructorDTO> instructorDTOList = new ArrayList<>();
-        instructorList.stream().forEach(i -> instructorDTOList.add(instructorEntityToInstructorDTO.map(i)));
+        instructorList.forEach(i -> instructorDTOList.add(instructorEntityToInstructorDTO.map(i)));
         return instructorDTOList;
     }
 

@@ -45,7 +45,7 @@ public class CourseServiceImpl implements CourseService{
     public List<CourseDTO> findAllCourses() {
         List<Course> courseList = courseRepository.findAll();
         List<CourseDTO> courseDTOList = new ArrayList<>();
-        courseList.stream().forEach(c -> courseDTOList.add(courseEntityToCourseDTO.map(c)));
+        courseList.forEach(c -> courseDTOList.add(courseEntityToCourseDTO.map(c)));
         return courseDTOList;
     }
 
