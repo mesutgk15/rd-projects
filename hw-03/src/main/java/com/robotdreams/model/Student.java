@@ -1,11 +1,13 @@
 package com.robotdreams.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Student {
@@ -13,13 +15,16 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private LocalDate birthDate;
     private String address;
+    @Column(nullable = false)
     private char gender;
 
     @ManyToMany
-    private List<Course> courses = new ArrayList<>();
+    private Set<Course> courses = new HashSet<>();
 
     public Student() {
     }
@@ -63,10 +68,17 @@ public class Student {
         this.gender = gender;
     }
 
-    public List<Course> getCourses() {
+    public Set<Course> getCourses() {
         return courses;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {

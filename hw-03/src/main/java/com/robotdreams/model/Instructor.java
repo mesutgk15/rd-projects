@@ -1,5 +1,7 @@
 package com.robotdreams.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -9,17 +11,19 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Instructor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
     private String name;
     private String address;
     private String phoneNumber;
 
     @OneToMany(mappedBy = "instructor")
+    @JsonBackReference
     private List<Course> courses = new ArrayList<>();
 
     public Instructor() {

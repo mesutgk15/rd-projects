@@ -1,12 +1,12 @@
 package com.robotdreams.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Course {
@@ -14,16 +14,19 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String code;
     private double creditScore;
 
     @ManyToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.PERSIST)
+    @JsonManagedReference
     private Instructor instructor;
 
     @ManyToMany(mappedBy = "courses")
-    private List<Student> students = new ArrayList<>();
+    private Set<Student> students = new HashSet<>();
 
     public Course() {
     }
@@ -64,6 +67,10 @@ public class Course {
 
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
     }
 
     @Override

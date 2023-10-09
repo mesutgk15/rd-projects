@@ -4,6 +4,7 @@ import com.robotdreams.model.*;
 import com.robotdreams.repository.CourseRepository;
 import com.robotdreams.repository.InstructorRepository;
 import com.robotdreams.repository.StudentRepository;
+import com.robotdreams.service.InstructorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -34,6 +35,10 @@ public class TestDataInitializer implements ApplicationRunner {
     @Override
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
+
+        if (studentRepository.findAll().size() == 0) {
+
+
         //Create student objects
         Student student1 = new Student("Ali", LocalDate.of(2000, Month.JANUARY, 10), "Istanbul, Levent", 'M');
         Student student2 = new Student("Ayşe", LocalDate.of(2000, Month.MAY, 22), "Istanbul, Besiktas", 'F');
@@ -48,6 +53,7 @@ public class TestDataInitializer implements ApplicationRunner {
         //Create instructor objects
         Instructor instructor1 = new PermanentInstructor("Mehmet", "Istanbul, Ortakoy", "123456789");
         Instructor instructor2 = new VisitingResearcher("Hasan", "Istanbul, Ortakoy", "987654321");
+        ((VisitingResearcher) instructor2).setWorkingHours(10);
 
         //Add instructor objects into a HashSet
         Set<Instructor> instructorsToSave = new HashSet<>();
@@ -82,6 +88,8 @@ public class TestDataInitializer implements ApplicationRunner {
         //Save objects to DB
 
         saveToDb(objectsToSave);
+
+        }
 
 
     }
