@@ -30,7 +30,7 @@ public class CourseController {
         return courseService.findCourseById(id);
     }
 
-    @GetMapping("/new")
+    @PostMapping ("/new")
     public void createCourse(@RequestBody CourseDTO courseDTO) {
         courseService.createCourse(courseDTO);
     }
